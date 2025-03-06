@@ -14,7 +14,7 @@ def to_decimal(bin):  # 2진수를 10진수로 변환
 
 
 def to_binary(dec):  # 10진수를 2진수로 변환
-    if dec == 0:
+    if dec == 0:  # 결과가 0인 경우 처리
         return '0'
 
     binary = ""
