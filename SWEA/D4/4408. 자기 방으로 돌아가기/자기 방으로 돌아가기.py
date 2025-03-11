@@ -1,4 +1,3 @@
-# 가장 많이 겹치는 구간의 겹친 횟수가 정답이다.
 T=int(input())
 for tc in range(1,T+1):
     N=int(input())
