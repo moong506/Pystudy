@@ -3,7 +3,7 @@ import heapq
 
 def dijkstra(s_node):
     pq = [(0, s_node)]
-    ds = [float('inf')]*(V+1)
+    ds = [INF]*(V+1)
     ds[s_node] = 0      # 시작점 자신은 0
 
     while pq:
@@ -24,6 +24,7 @@ def dijkstra(s_node):
 
     return ds[1:]
 
+INF = 2000001
 V, E = map(int, input().split())
 K = int(input())
 s_node = K
@@ -34,7 +35,7 @@ for _ in range(E):
 
 result = dijkstra(K)
 for i in range(V):
-    if result[i] == float('inf'):
+    if result[i] == INF:
         print('INF')
     else:
         print(result[i])
