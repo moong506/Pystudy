@@ -1,43 +1,67 @@
-import heapq
+# kruskal은 간선 위주 알고리즘
+# 간선들을 정렬하고 최소 간선을 뽑자 이때, 사이클을 검사하자
 
-def prim(tax):
-    pq = [(0, 0)]
-    visited = [0] * N
-    min_cost = 0
-    
-    dists = [float('inf')] * N      # 최소비용 저장 리스트
-    dists[0] = 0                # 시작점 비용은 0
+# kruskal 버전
+def find_set(x):
+    if x == parents[x]:
+        return x
 
-    while pq:
-        cost, node = heapq.heappop(pq)
-        if visited[node]:
-            continue
+    # 기본코드 : 경로 압축 안 한 버전
+    # return find_set(parents[x])
 
-        # node로 가는 간선을 확정짓는 코드
-        visited[node] = 1
-        min_cost += cost
+    # 경로 압축 코드
+    parents[x] = find_set(parents[x])
+    return parents[x]
 
-        for next_node in range(N):
-            if visited[next_node]:
-                continue
 
-            # ((x좌표 사이^2) + (y좌표 사이^2)) * tax
-            new_cost = ((x_lst[next_node]-x_lst[node])**2 + (y_lst[next_node]-y_lst[node])**2) * tax
-            
-            # 우선순위큐에 삽입된 거리를 저장하면서 진행
-            # 더 작은 비용으로 갈 수 있을 때만 heapq에 삽입
-            if new_cost < dists[next_node]:
-                dists[next_node] = new_cost
-                heapq.heappush(pq, (new_cost, next_node))
+def union(x, y):
+    ref_x = find_set(x)
+    ref_y = find_set(y)
 
-    return round(min_cost)
+    if ref_x == ref_y:
+        return
+
+    # 기본 연결 코드
+    # parents[ref_y] = ref_x
+
+    # 디버깅용 or 문제 조건에 따라 설정
+    if ref_x < ref_y:
+        parents[ref_y] = ref_x
+    else:
+        parents[ref_x] = ref_y
+
 
 T = int(input())
-for tc in range(1, T+1):
+
+for tc in range(1, T + 1):
     N = int(input())
-    x_lst = list(map(int, input().split()))
-    y_lst = list(map(int, input().split()))
+    x_list = list(map(int, input().split()))
+    y_list = list(map(int, input().split()))
     tax = float(input())
 
-    result = prim(tax)
-    print(f'#{tc} {result}')
+    parents = [i for i in range(N)]
+    min_cost = 0
+
+    # 1. 간선들 정보를 모두 저장
+    edges = []
+    for i in range(N):
+        for j in range(i + 1, N):
+            cost = ((x_list[i] - x_list[j]) ** 2 +
+                    (y_list[i] - y_list[j]) ** 2) * tax
+            edges.append((i, j, cost))
+
+    # 2. 가중치 기준으로 오름차순 정렬
+    edges.sort(key=lambda x: x[2])
+
+    # 3. 싸이클 검사하면서, 앞에서부터 간선을 연결한다.
+    #  - 언제까지 반복? N-1 개의 간선이 선택될 때 까지
+    count = 0
+    for u, v, w in edges:
+        if find_set(u) != find_set(v):
+            union(u, v)
+            min_cost += w
+            count += 1
+        if count == N - 1:
+            break
+
+    print(f'#{tc} {min_cost:.0f}')
