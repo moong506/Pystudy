@@ -1,0 +1,8 @@
+-- 코드를 입력하세요
+-- TRUNCATE 함수로 10,000(-4)단위로 절삭
+-- ex) 22,000 -> 20,000
+SELECT TRUNCATE(PRICE, -4) AS PRICE_GROUP, COUNT(*) AS PRODUCTS
+-- COUNT(*) AS _ -> 각 그룹의 행 개수 카운트
+FROM PRODUCT
+GROUP BY PRICE_GROUP    -- PRICE_GROUP 기준 그룹화
+ORDER BY PRICE_GROUP    -- 정렬
