@@ -1,0 +1,6 @@
+-- 코드를 입력하세요
+SELECT *
+FROM FOOD_PRODUCT
+WHERE PRICE = 
+    (SELECT MAX(PRICE)
+     FROM FOOD_PRODUCT); -- WHERE절은 집계함수를 쓸수 없음
