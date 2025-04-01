@@ -1,16 +1,16 @@
-# 3/24 ~ 3/30 주간 문제(필수)
-### BFS 1문제
-  - 상어로부터 가장 먼 칸의 거리 값을 구하는 문제입니다. [SWEA 물놀이 문제](https://swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AXWXMZta-PsDFAST)와 유사하나 더 쉽습니다.
-### 최소 신장 트리 1문제
-  - 가능하다면 프림, 크루스칼 두 가지 알고리즘을 모두 연습해 봅시다.
+# 3/31 ~ 4/6 주간 문제(필수)
+### 문자열 1문제
+  - 문자열을 순회하면서 특수문자로 이루어진 이모티콘 포함 여부를 판별하는 문제입니다.
+### 리스트 1문제
+  - IM 대비 문제와 비슷한 유형의 문제입니다. 반드시 리스트를 만들어야 하는 건 아니지만, 2차원 리스트를 생성하는 편이 직관적일 것 같네요.
 
 
 <center>
 
 |문제|링크|설명|
 |:---|:---:|:---:|
-|BOJ 17086. 아기 상어 2|https://www.acmicpc.net/problem/17086|BFS|
-|BOJ 1922. 네트워크 연결|https://www.acmicpc.net/problem/1922|최소 신장 트리|
+|BOJ 10769. 행복한지 슬픈지|https://www.acmicpc.net/problem/10769|문자열|
+|BOJ 1652. 누울 자리를 찾아라|https://www.acmicpc.net/problem/1652|문자열|
 
 </center>
 
