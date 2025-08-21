@@ -2,7 +2,7 @@ import sys
 input = sys.stdin.readline
 from collections import deque
 
-# 먹을 수 있는 물고기가 있는지 판별하는 함수
+# 먹을 수 있는 물고기 중 가장 거리가 짧은 물고기를 반환하는 함수
 def check_available_fish(n, vis, sz):
     min_dist = 1e7
     x = 0
@@ -14,9 +14,8 @@ def check_available_fish(n, vis, sz):
                 x, y = i, j
     return [min_dist, x, y]
 
-# 먹을 수 있는 물고기의 위치 별로 거리를 계산하는 함수
+# bfs 돌려서 가능한 모든 곳의 최단 경로 탐색
 def calculate_distance(n, start_i, start_j ,sz):
-    # 이 아래에서 bfs로 길 찾기 수행
     visited = [[0] * n for _ in range(n)]
     visited[start_i][start_j] = 1
     q = deque()
@@ -59,22 +58,23 @@ for i in range(N):
 while True:
     # 1. 상어 위치 기준으로 bfs 돌리기
     visit = calculate_distance(N, sti, stj ,size)
+    # 2. 제일 거리가 작은 물고기 위치와 거리 반환 
     fish_dist, fish_i, fish_j = check_available_fish(N, visit, size)
 
     # 갈 수 없어서 먹이를 먹지 못하는 경우
     if fish_dist == 1e7:
         print(dist)
         break
-    # 2. 물고기 이동 후 먹기
+    # 3. 물고기 이동 후 먹기
     dist += fish_dist - 1
     eaten += 1
 
-    # 위치 초기화
+    # 4. 위치 초기화
     arr[sti][stj] = 0
     arr[fish_i][fish_j] = 0
     sti, stj = fish_i, fish_j
-    
-    # 사이즈 초기화
+
+    # 5. 사이즈 초기화
     if size == eaten:
         size += 1
         eaten = 0
