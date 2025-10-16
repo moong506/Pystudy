@@ -2,13 +2,20 @@ import heapq
 def solution(scoville, K):
     answer = 0
     heapq.heapify(scoville)
-    while len(scoville) > 1:
+    
+    while True:
         a = heapq.heappop(scoville)
         if a >= K:
             break
-        b = heapq.heappop(scoville)
-        heapq.heappush(scoville, a+b*2)
-        answer += 1
-    if scoville[0] < K:
-        return -1
+        if len(scoville) == 0:
+            return -1
+        else:
+            b = heapq.heappop(scoville)
+            if b == 0:
+                if K == 0:
+                    return 0
+                else:
+                    return -1
+            heapq.heappush(scoville, a+b*2)
+            answer += 1
     return answer
